@@ -1,0 +1,15 @@
+<h1>Showing all saved location</h1>
+
+<ul>
+{% for location in location_list %}
+    <li>{{location.name}}
+        <ul>{{location.address}}
+            <li>{{location.xcoord}}</li>
+            <li>{{location.ycoord}}</li>
+
+        </ul>
+    </li>
+    {% empty %}
+    <li>No Locations yet.</li>
+    {% endfor %}
+</ul>

@@ -1,0 +1,37 @@
+{% load static %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="{% static 'js/retrieve_location.js' %}"></script>
+
+<a href="{% url 'index' %}">Back to index Page</a>
+
+<div>You are now adding visited location record for Chan Tai Chi (id:<span id="caseID">1</span>)</div><br>
+
+<form id="addLocationForm" action="" method="post">
+    <div><label for="dateFrom">Date from: </label><input type="date" id="dateFrom" name="dateFrom"></div>
+    <div><label for="dateTo">Date to: </label><input type="date" id="dateTo" name="dateTo"></div><br>
+    <label for="categoryRadio">Category:</label>
+    <div id="categoryRadio">
+        <input type="radio" id="category1" name="category" value="Residence"><label for="category1">Residence</label><br>
+        <input type="radio" id="category2" name="category" value="Visit"><label for="category2">Visit</label><br>
+        <input type="radio" id="category3" name="category" value="Workplace"><label for="category3">Workplace</label><br><br>
+        <label for="q">Location (Click "Retrieve" after entering location)</label><br>
+        <span><input type="text" id="location" name="q" placeholder="Enter location in here"></span>
+        <span><input type="button" onclick="retrieve()" value="Retrieve"></span>
+        <p id="retrieveStatus"></p>
+    </div>
+    <label for="locationRadio">Retrieved location result(s)</label>
+    <div id="locationRadio">
+        <!-- <input type="radio" id="text1" name="text" value="text1"><label for="text1">text1<br>text1</label><br> -->
+    </div>
+    <span>
+        <input id="confirmButton" type="button" value="Confirm" disabled=true>
+    </span>
+    <div id="confirmStatus"></div>
+
+</form>
+
+<!-- <button onclick="checkSelectedLocation()">check Selected Location</button>
+<button onclick="simulatePOSTfrom()">simulate POST from</button>
+<button onclick="generateJson()">generateJson</button> -->
+
+<!--<h1>Location Record</h1>-->

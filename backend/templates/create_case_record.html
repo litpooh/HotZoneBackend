@@ -1,0 +1,28 @@
+{% load static %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="{% static 'js/create_case_record.js' %}"></script>
+<a href="{% url 'index' %}">Back to index Page</a>
+<h1>Create Case Record</h1>
+<form id="createCaseForm" action="" method="post">
+    <label for="name">Patient Name: </label><input type="text" id="name" name="name"><br>
+    <label for="idNumber">Identity Document Number: </label><input type="text" id="idNumber" name="idNumber"><br>
+    <label for="dateOfBirth">Date of Birth: </label><input type="date" id="dateOfBirth" name="dateOfBirth"><br>
+    <label for="virus">Virus Name: </label>
+    <input list="virus" name="virus" id="virus_input">
+    <datalist id="virus">
+        {% for virus in viruses %}
+        <option value="{{virus.name}}"></option>        
+        {% endfor %}
+    </datalist><br>
+    <label for="dateOfConfirm">Date Confirmed: </label><input type="date" id="dateOfConfirm" name="dateOfConfirm"><br>
+
+    <label for="localOrImported">Local or Imported Case: </label><br>
+    <input type="radio" id="lol1" name="localOrImported" value="Local"><label for="lol1">Local</label><br>
+    <input type="radio" id="lol2" name="localOrImported" value="Imported"><label for="lol2">Imported</label><br><br>
+
+    <input type="button" id="createButton" value="Create Case">
+    <!-- <input type="button" value="Generate Json" onclick="generateJson()"> -->
+
+
+</form>
+<p id="createStatus"></p>

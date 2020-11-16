@@ -1,0 +1,21 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+django-extensions = "~=3.0.9"
+
+[packages]
+django = "~=3.1.1"
+dj-database-url = "*"
+gunicorn = "*"
+psycopg2 = "*"
+djangorestframework = "*"
+markdown = "*"
+django-filter = "*"
+whitenoise = "*"
+environs = {extras = ["django"], version = "*"}
+
+[requires]
+python_version = "3.8"

@@ -36,3 +36,14 @@ class VisitedLocationSerializer(serializers.Serializer):
 
         return visited_location
 
+
+class VisitedLocationStandardSerializer(serializers.Serializer):
+    location = LocationSerializer()
+    dateFrom = serializers.DateField()
+    dateTo = serializers.DateField()
+    category = serializers.CharField(max_length=20)
+    caseRecord = CaseRecordSerializer()
+
+    def create(self, validated_data):
+        return validated_data
+

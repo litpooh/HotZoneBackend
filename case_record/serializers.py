@@ -43,3 +43,13 @@ class CreateCaseRecordSerializer(serializers.Serializer):
         case_record = CaseRecord.objects.create(patient=patient,virus=virusObj,dateOfConfirm=dateOfConfirm,localOrImported=localOrImported)
 
         return case_record
+
+
+class ViewCaseSerializer(serializers.Serializer):
+    dateOfConfirm = serializers.DateField()
+    localOrImported = serializers.CharField(max_length=20)
+    patient = PatientSerializer()
+    virus = VirusSerializer()
+
+    def create(self, validated_data):
+        return validated_data

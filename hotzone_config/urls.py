@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from case_record.views import CaseRecordAPI
 from visited_location.views import CreateVisitedLocationAPI, CreateVisitedLocationView
+from locations.views import LocationWithMatchOnTopView
 from case_record.views import CreateCaseRecordView, CreateCaseRecordAPI, IndexView
 from virus.views import CreateVirusView, CreateVirusAPI
 from django.conf import settings
@@ -32,5 +33,6 @@ urlpatterns = [
     path('create_virus/', CreateVirusView.as_view(), name='create_virus'),
     path('post_create_virus/', CreateVirusAPI.as_view(), name='post_create_virus'),
     path('', IndexView.as_view(), name='index'),
-    path('create_visitedlocation/', CreateVisitedLocationView.as_view(), name='create_visitedlocation')
+    path('create_visitedlocation/', CreateVisitedLocationView.as_view(), name='create_visitedlocation'),
+    path('search_location_post/', LocationWithMatchOnTopView.as_view(), name='search_location_post')
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

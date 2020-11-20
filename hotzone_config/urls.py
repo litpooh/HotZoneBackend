@@ -18,7 +18,7 @@ from django.urls import path, include
 from case_record.views import CaseRecordAPI
 from visited_location.views import CreateVisitedLocationAPI, CreateVisitedLocationView
 from locations.views import LocationWithMatchOnTopView
-from case_record.views import CreateCaseRecordView, CreateCaseRecordAPI, IndexView
+from case_record.views import CreateCaseRecordView, CreateCaseRecordAPI, IndexView, AllCaseRecord, SearchCaseRecord
 from virus.views import CreateVirusView, CreateVirusAPI
 from django.conf import settings
 from django.conf.urls.static import static
@@ -34,5 +34,7 @@ urlpatterns = [
     path('post_create_virus/', CreateVirusAPI.as_view(), name='post_create_virus'),
     path('', IndexView.as_view(), name='index'),
     path('create_visitedlocation/', CreateVisitedLocationView.as_view(), name='create_visitedlocation'),
-    path('search_location_post/', LocationWithMatchOnTopView.as_view(), name='search_location_post')
+    path('search_location_post/', LocationWithMatchOnTopView.as_view(), name='search_location_post'),
+    path('all_caserecord_post/', AllCaseRecord.as_view(), name="all_caserecord_post"),
+    path('search_caserecord_post/', SearchCaseRecord.as_view(), name='search_caserecord_post/')
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

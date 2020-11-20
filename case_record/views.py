@@ -3,8 +3,12 @@ from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.views.generic import TemplateView
-from case_record.serializers import CaseRecordSerializer, CreateCaseRecordSerializer
+from case_record.serializers import CaseRecordSerializer, CreateCaseRecordSerializer, ViewCaseSerializer
 from virus.models import Virus
+from case_record.models import CaseRecord
+from patient.models import Patient
+from rest_framework.renderers import JSONRenderer
+from django.http import JsonResponse
 
 # Create your views here.
 class CaseRecordAPI(APIView):
@@ -47,3 +51,30 @@ class IndexView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         return context
+
+class AllCaseRecord(APIView):
+    def post(self, request, *args, **kwargs):
+        allCase = CaseRecord.objects.all()
+        serializer = ViewCaseSerializer(allCase,many=True)
+        print(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+        # return Response(serializer.errors,status.HTTP_403_FORBIDDEN)
+
+
+
+class SearchCaseRecord(APIView):
+    def post(self, request, *args, **kwargs):
+        print(request.data)
+        json = request.data
+        filteredCase = None
+        if 'caseID' in json:
+            filteredCase = CaseRecord.objects.filter(id=json['caseID'])
+        elif 'name' in json:
+            filteredCase = CaseRecord.objects.filter(patient__name__icontains=json['name'])
+        elif 'idNumber' in json:
+            filteredCase = CaseRecord.objects.filter(patient__idNumber=json['idNumber'])
+        else:
+            return Response("Condition_Not_Exist", status=status.HTTP_400_BAD_REQUEST)
+        serializer = ViewCaseSerializer(filteredCase,many=True)
+        j = JSONRenderer().render(serializer.data)
+        return Response(j,status=status.HTTP_200_OK)

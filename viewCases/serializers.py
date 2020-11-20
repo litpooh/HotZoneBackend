@@ -65,6 +65,7 @@ class CreateCaseRecordSerializer(serializers.Serializer):
 
 
 class ViewCaseSerializer(serializers.Serializer):
+    id = serializers.IntegerField()
     dateOfConfirm = serializers.DateField()
     localOrImported = serializers.CharField(max_length=20)
     patient = PatientSerializer()

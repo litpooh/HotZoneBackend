@@ -41,8 +41,10 @@ class AllCaseRecord(APIView):
     def post(self, request, *args, **kwargs):
         allCase = CaseRecord.objects.all()
         serializer = ViewCaseSerializer(allCase,many=True)
-        print(serializer.data)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        # print(serializer.data)
+        j = JSONRenderer().render(serializer.data)
+        print(j)
+        return Response(j, status=status.HTTP_200_OK)
         # return Response(serializer.errors,status.HTTP_403_FORBIDDEN)
 
 class SearchCaseRecord(APIView):

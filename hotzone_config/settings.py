@@ -29,7 +29,7 @@ SECRET_KEY = env('HOTZONE_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
-DEBUG = env.bool('HOTZONE_DEBUG', default=False)
+# DEBUG = env.bool('HOTZONE_DEBUG', default=False)
 
 ALLOWED_HOSTS =  ['hotzonegroupproject.herokuapp.com', 'localhost', '127.0.0.1']
 
@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     #our apps
     'addLocation',
-    'viewCases'
+    'viewCases',
     'login',
 ]
 
@@ -102,15 +102,16 @@ DATABASES = {
 }
 
 # DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'hotzone', 
-#         'USER': 'postgres', 
-#         'PASSWORD': '62915859',
-#         'HOST': '127.0.0.1', 
-#         'PORT': '5432',
-#     }
+#  'default': {
+#  'ENGINE': 'django.db.backends.postgresql',
+#  'NAME': 'hotzone',
+#  'USER': 'username',
+#  'PASSWORD': '1234',
+#  'HOST': 'localhost',
+#  'PORT': '',
+#  }
 # }
+
 
 
 # Password validation

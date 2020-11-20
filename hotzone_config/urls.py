@@ -36,4 +36,7 @@ urlpatterns = [
     path('index/', IndexView.as_view(), name='index'),
     path('create_visitedlocation/', CreateVisitedLocationView.as_view(), name='create_visitedlocation'),
     path('locations/', LocationView.as_view(), name='locations-information'),
+    path('search_location_post/', LocationWithMatchOnTopView.as_view(), name='search_location_post'),
+    path('all_caserecord_post/', AllCaseRecord.as_view(), name="all_caserecord_post"),
+    path('search_caserecord_post/', SearchCaseRecord.as_view(), name='search_caserecord_post/')
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

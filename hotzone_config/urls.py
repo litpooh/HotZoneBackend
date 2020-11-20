@@ -14,26 +14,28 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.contrib.auth import views as auth_views
 from django.urls import path, include
-from case_record.views import CaseRecordAPI
-from visited_location.views import CreateVisitedLocationAPI, CreateVisitedLocationView
-from locations.views import LocationWithMatchOnTopView
-from case_record.views import CreateCaseRecordView, CreateCaseRecordAPI, IndexView, AllCaseRecord, SearchCaseRecord
-from virus.views import CreateVirusView, CreateVirusAPI
+from addLocation.views import *
+from viewCases.views import *
+from login.views import *
 from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
+    path('logout/', logout_view),
+	path('', auth_views.LoginView.as_view(template_name='login.html')),
+	path('login/', auth_views.LoginView.as_view(template_name='login.html'), name = 'login'),
     path('admin/', admin.site.urls),
-    path('locations/', include('locations.urls')),
     path('create_caserecord_post/', CaseRecordAPI.as_view(),name='create_caserecord_post'),
     path('create_visitedlocation_post/', CreateVisitedLocationAPI.as_view(),name='create_visitedlocation_post'),
     path('create_caserecord/', CreateCaseRecordView.as_view(), name="create_caserecord"),
     path('post_caserecord/', CreateCaseRecordAPI.as_view(),name="post_caserecord"),
     path('create_virus/', CreateVirusView.as_view(), name='create_virus'),
     path('post_create_virus/', CreateVirusAPI.as_view(), name='post_create_virus'),
-    path('', IndexView.as_view(), name='index'),
+    path('index/', IndexView.as_view(), name='index'),
     path('create_visitedlocation/', CreateVisitedLocationView.as_view(), name='create_visitedlocation'),
+    path('locations/', LocationView.as_view(), name='locations-information'),
     path('search_location_post/', LocationWithMatchOnTopView.as_view(), name='search_location_post'),
     path('all_caserecord_post/', AllCaseRecord.as_view(), name="all_caserecord_post"),
     path('search_caserecord_post/', SearchCaseRecord.as_view(), name='search_caserecord_post/')

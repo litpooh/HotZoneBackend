@@ -5,6 +5,7 @@ from rest_framework.response import Response
 from .models import VisitedLocation
 from .serializers import VisitedLocationSerializer
 from django.views.generic import TemplateView
+from .retrieveLocation import searchAndCompareLocation
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -32,3 +33,11 @@ class LocationView(LoginRequiredMixin, TemplateView):
         context = super().get_context_data(**kwargs)
         context['location_list'] = Location.objects.all()
         return context
+
+class LocationWithMatchOnTopView(APIView):
+    def post(self, request, *args, **kwargs):
+        print(request.data)
+        locations = searchAndCompareLocation(request.data['keyword'])
+        if locations != -1:
+            return Response(locations, status=status.HTTP_200_OK)
+        return Response(locations, status=status.HTTP_400_BAD_REQUEST)

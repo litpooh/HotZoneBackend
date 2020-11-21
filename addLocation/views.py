@@ -2,7 +2,7 @@ from django.shortcuts import render
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .models import VisitedLocation
+from .models import VisitedLocation, Location
 from .serializers import VisitedLocationSerializer
 from django.views.generic import TemplateView
 from .retrieveLocation import searchAndCompareLocation

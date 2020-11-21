@@ -4,7 +4,7 @@
 
 <a href="{% url 'index' %}">Back to index Page</a>
 
-<div>You are now adding visited location record for Chan Tai Chi (id:<span id="caseID">1</span>)</div><br>
+<div>You are now adding visited location record for {{case.patient.name}} (id:<span id="caseID">{{case.pk}}</span>)</div><br>
 
 <form id="addLocationForm" action="" method="post">
     <div><label for="dateFrom">Date from: </label><input type="date" id="dateFrom" name="dateFrom"></div>

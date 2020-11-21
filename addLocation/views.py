@@ -8,6 +8,8 @@ from django.views.generic import TemplateView
 from .retrieveLocation import searchAndCompareLocation
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from viewCases.models import CaseRecord
+from django.shortcuts import get_object_or_404
 
 class CreateVisitedLocationAPI(APIView):
     def post(self, request, *args, **kwargs):
@@ -23,7 +25,11 @@ class CreateVisitedLocationView(LoginRequiredMixin, TemplateView):
     template_name = "create_visited_location.html"
 
     def get_context_data(self, **kwargs):
-        return
+        context = super().get_context_data(**kwargs)
+        context['case']= get_object_or_404(CaseRecord, pk=context['caseID'])
+        print(context['case'])
+        return context
+    
 
 class LocationView(LoginRequiredMixin, TemplateView):
     login_url = 'login'

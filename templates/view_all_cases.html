@@ -1,6 +1,7 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
   <head>
     <meta charset="utf-8">
     <title>Case Records</title>
@@ -10,11 +11,24 @@
     <a href="{% url 'index' %}">Back to HotZone Index Page</a>
     <p>Select a case to view location records and add visited locations.</p>
     {% if case_records %}
-        <ul>
+        <table>
+          <tr>
+            <th> Patient </th>
+            <th> Date of Confirmed </th>
+            <th> Virus </th>
+            <th> Local/Imported</th>
+            <th> Action </th>
+          </tr>
         {% for case in case_records %}
-            <li><a href="{% url 'viewLocationRecords' case.id %}">{{ case.patient }}, {{ case.dateOfConfirm }}, {{ case.virus }}, {{ case.localOrImported }}.</a></li>
+          <tr>
+            <td>{{ case.patient }}</td>
+            <td>{{ case.dateOfConfirm }}</td>
+            <td>{{ case.virus }}</td>
+            <td>{{ case.localOrImported }} </td>
+            <td><a href="{% url 'viewLocationRecords' case.id %}"> Add Visits </a></td>
+          </tr>
         {% endfor %}
-        </ul>
+        </table>
     {% else %}
         <p>No case records are available.</p>
     {% endif %}

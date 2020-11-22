@@ -9,7 +9,7 @@
     {% if case_records %}
         <ul>
         {% for case in case_records %}
-            <li><a href="{% url 'create_virus' %}">{{ case.dateOfConfirm }} {{ case.patient }} {{ case.virus }} {{ case.localOrImported }}</a></li>
+            <li><a href="{% url 'viewLocationRecords' case.id %}">{{ case.dateOfConfirm }} {{ case.patient }} {{ case.virus }} {{ case.localOrImported }}</a></li>
         {% endfor %}
         </ul>
     {% else %}

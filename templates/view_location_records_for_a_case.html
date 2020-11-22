@@ -1,0 +1,18 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Location Records</title>
+  </head>
+  <body>
+    {% csrf_token %}
+    <h1>{{ caserecord.patient.name }}'s Location History</h1>
+    <a href="{% url 'index' %}">Back to index Page</a>
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+    {% for location in caserecord.visitedlocation_set.all %}
+        <p>{{ location.location }}, {{ location.category }}, {{ location.dateFrom }} to {{ location.dateTo }}.</p>
+    {% endfor %}
+    </ul>
+  </body>
+</html>

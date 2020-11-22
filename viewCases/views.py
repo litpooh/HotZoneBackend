@@ -106,3 +106,8 @@ class IndexView(LoginRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         return context
+
+
+class ViewLocationRecordsView(generic.DetailView):
+    model = CaseRecord
+    template_name = 'view_location_records_for_a_case.html'

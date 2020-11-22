@@ -1,5 +1,5 @@
-<h1>Showing all saved location</h1>
-
+<h1>Saved Locations</h1>
+<a href="{% url 'index' %}">Back to HotZone Index Page</a>
 <ul>
 {% for location in location_list %}
     <li>{{location.name}}

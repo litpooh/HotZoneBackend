@@ -8,12 +8,12 @@
   <body>
     {% csrf_token %}
     <h1>{{ caserecord.patient.name }}'s Location History</h1>
-    <a href="{% url 'index' %}">Back to index Page</a>
+    <a href="{% url 'all_caserecord_post' %}" style="display:block;">Back to Case Records</a>
     {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
     {% for location in caserecord.visitedlocation_set.all %}
         <p>{{ location.location }}, {{ location.category }}, {{ location.dateFrom }} to {{ location.dateTo }}.</p>
     {% endfor %}
-    <a href="{% url 'create_visitedlocation' %}">Add Visited Location</a>
+    <a href="{% url 'create_visitedlocation' %}">Add Visited Location for {{ caserecord.patient.name}}</a>
     </ul>
   </body>
 </html>

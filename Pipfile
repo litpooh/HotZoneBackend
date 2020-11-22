@@ -5,6 +5,7 @@ verify_ssl = true
 
 [dev-packages]
 django-extensions = "~=3.0.9"
+werkzeug = "*"
 
 [packages]
 django = "~=3.1.1"

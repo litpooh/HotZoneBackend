@@ -2,11 +2,11 @@ var retrievedResult;
 
 function retrieve() {
     $.ajax({
-        type: "GET",
+        type: "POST",
         dataType: "json",
         crossDomain: true,
-        url: "https://geodata.gov.hk/gs/api/v1.0.0/locationSearch?q=",
-        data: $("#location").serialize(),
+        url: "../search_location_post/",
+        data: retrievedata(),
         success: function(result) {
             console.log(result);
             retrievedResult = result;
@@ -27,21 +27,46 @@ function retrieve() {
     })
 }
 
+function retrievedata(){
+    return {'keyword': $("#location").val()};
+}
+
 function retrieve_fake() {
     console.log($("#retrieveFrom").serialize());
     console.log();
 }
 
 function updateResult() {
-    var rLocation = "";
+    var table = $('#locationTable').DataTable();
+    table.clear();
     $.each(retrievedResult, function(i, val) {
         cleanJsonKey(val);
-        rLocation += '<input type="radio" id="text' + i + '"name="location" value=' + "'" + JSON.stringify(val) + "'" + '><label for="text' + i + '">' + val.name + '<br>(' + val.address + ')</label><br><br>'
+        table.row.add([val.name,val.address,val.xcoord,val.ycoord]).draw( false );;
     });
-    $("#locationRadio").html(rLocation);
 }
 
 $(document).ready(function() {
+    var table = $('#locationTable').DataTable(
+        {
+            "scrollY":        "500px",
+            "scrollCollapse": true,
+            "paging":         false,
+            "searching": false,
+            "aaSorting": [],
+            "ordering": false
+        }
+    );
+
+    $('#locationTable tbody').on( 'click', 'tr', function () {
+        if ( $(this).hasClass('selected') ) {
+            $(this).removeClass('selected');
+        }
+        else {
+            table.$('tr.selected').removeClass('selected');
+            $(this).addClass('selected');
+        }
+    } );
+
     $("#confirmButton").on('click', function() {
         var vlData = generateJson();
         $.ajax({
@@ -99,13 +124,10 @@ function simulatePOSTfrom() {
 }
 
 function generateLocationJson() {
-    var radios = document.getElementsByName('location');
-
-    for (var i = 0, length = radios.length; i < length; i++) {
-        if (radios[i].checked) {
-            return JSON.parse(radios[i].value);
-        }
-    }
+    var table = $('#locationTable').DataTable();
+    var tmp = table.row('.selected').data();
+    var tmpobj = {'name':tmp[0], 'address':tmp[1], 'xcoord': tmp[2], 'ycoord':tmp[3]};
+    return tmpobj;
 }
 
 function checkCaseID() {

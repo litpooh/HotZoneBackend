@@ -1,0 +1,22 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Case Records</title>
+  </head>
+  <body>
+    <h1>Case Records</h1>
+    <a href="{% url 'index' %}">Back to HotZone Index Page</a>
+    <p>Select a case to view location records and add visited locations.</p>
+    {% if case_records %}
+        <ul>
+        {% for case in case_records %}
+            <li><a href="{% url 'viewLocationRecords' case.id %}">{{ case.patient }}, {{ case.dateOfConfirm }}, {{ case.virus }}, {{ case.localOrImported }}.</a></li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No case records are available.</p>
+    {% endif %}
+  </body>
+</html>

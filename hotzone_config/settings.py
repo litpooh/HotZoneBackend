@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
+import os
 from pathlib import Path
 import dj_database_url
 from environs import Env
@@ -28,10 +29,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = env('HOTZONE_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
+
 # DEBUG = True
 DEBUG = env.bool('HOTZONE_DEBUG', default=False)
 
-ALLOWED_HOSTS =  ['hotzonegroupproject.herokuapp.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['hotzonegroupproject.herokuapp.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -44,7 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    #our apps
+    # our apps
     'addLocation',
     'viewCases',
     'login',
@@ -63,7 +65,6 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'hotzone_config.urls'
 
-import os
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -98,7 +99,7 @@ WSGI_APPLICATION = 'hotzone_config.wsgi.application'
 # }
 
 DATABASES = {
-'default': env.dj_db_url('DATABASE_URL')
+    'default': env.dj_db_url('DATABASE_URL')
 }
 
 # DATABASES = {
@@ -111,7 +112,6 @@ DATABASES = {
 #  'PORT': '',
 #  }
 # }
-
 
 
 # Password validation
@@ -138,7 +138,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Hong_Kong'
 
 USE_I18N = True
 

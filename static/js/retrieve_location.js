@@ -2,11 +2,11 @@ var retrievedResult;
 
 function retrieve() {
     $.ajax({
-        type: "GET",
+        type: "POST",
         dataType: "json",
         crossDomain: true,
-        url: "https://geodata.gov.hk/gs/api/v1.0.0/locationSearch?q=",
-        data: $("#location").serialize(),
+        url: "../search_location_post/",
+        data: retrievedata(),
         success: function(result) {
             console.log(result);
             retrievedResult = result;
@@ -27,6 +27,10 @@ function retrieve() {
     })
 }
 
+function retrievedata(){
+    return {'keyword': $("#location").val()};
+}
+
 function retrieve_fake() {
     console.log($("#retrieveFrom").serialize());
     console.log();
@@ -34,6 +38,7 @@ function retrieve_fake() {
 
 function updateResult() {
     var table = $('#locationTable').DataTable();
+    table.clear();
     $.each(retrievedResult, function(i, val) {
         cleanJsonKey(val);
         table.row.add([val.name,val.address,val.xcoord,val.ycoord]).draw( false );;
@@ -46,7 +51,9 @@ $(document).ready(function() {
             "scrollY":        "500px",
             "scrollCollapse": true,
             "paging":         false,
-            "searching": false
+            "searching": false,
+            "aaSorting": [],
+            "ordering": false
         }
     );
 

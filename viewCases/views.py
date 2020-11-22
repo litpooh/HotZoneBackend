@@ -5,7 +5,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.renderers import JSONRenderer
 from django.views.generic import TemplateView
-from .serializers import CaseRecordSerializer, CreateCaseRecordSerializer, ViewCaseSerializer
+from .serializers import CaseRecordSerializer, CreateCaseRecordSerializer, ViewCaseSerializer, VirusSerializer
 from .models import *
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import generic
@@ -105,6 +105,7 @@ class IndexView(LoginRequiredMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['cases']= CaseRecord.objects.all()
         return context
 
 

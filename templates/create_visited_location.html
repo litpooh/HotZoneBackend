@@ -1,10 +1,13 @@
 {% load static %}
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
 <script type="text/javascript" src="{% static 'js/retrieve_location.js' %}"></script>
 
 <a href="{% url 'index' %}">Back to index Page</a>
 
-<div>You are now adding visited location record for Chan Tai Chi (id:<span id="caseID">1</span>)</div><br>
+<div>You are now adding visited location record for {{case.patient.name}} (id:<span id="caseID">{{case.pk}}</span>)</div><br>
 
 <form id="addLocationForm" action="" method="post">
     <div><label for="dateFrom">Date from: </label><input type="date" id="dateFrom" name="dateFrom"></div>
@@ -19,10 +22,17 @@
         <span><input type="button" onclick="retrieve()" value="Retrieve"></span>
         <p id="retrieveStatus"></p>
     </div>
-    <label for="locationRadio">Retrieved location result(s)</label>
-    <div id="locationRadio">
-        <!-- <input type="radio" id="text1" name="text" value="text1"><label for="text1">text1<br>text1</label><br> -->
-    </div>
+    <label for="locationRadio">Retrieved location result(s) (Select below)</label>
+    <table id="locationTable" class="display" style="width: 100% ; height: 500px">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Address</th>
+                <th>X Coord</th>
+                <th>Y Coord</th>
+            </tr>
+        </thead>
+    </table>
     <span>
         <input id="confirmButton" type="button" value="Confirm" disabled=true>
     </span>

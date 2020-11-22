@@ -1,9 +1,20 @@
 <h1>Hot Zone</h1>
+<button onclick="location.href='../logout'">logout</button>
 
 <ul>
     <li><a href="{% url 'all_caserecord_post' %}">View All Cases</a></li>
     <li><a href="{% url 'create_caserecord' %}">Create New Case Record</a></li>
     <li><a href="{% url 'create_virus' %}">Create New Virus Record</a></li>
-    <li><a href="{% url 'create_visitedlocation' %}">Add Visited location record for Case ID:1</a></li>
-
+    <li>
+        <a>Add Visited location record for Case ID:</a>
+        <input list="cases" id="case_input">
+        <datalist id="cases">
+            {% for case in cases %}
+            <option value="{{case.pk}}"></option>        
+            {% endfor %}
+        </datalist>
+        <button type="button" onclick="location.href='../create_visitedlocation/' + document.getElementById('case_input').value">add</button>
+    </li>
+    <li><a href="{% url 'locations-information' %}">List all saved location</a></li>
 </ul>
+

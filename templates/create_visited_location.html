@@ -5,9 +5,9 @@
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
 <script type="text/javascript" src="{% static 'js/retrieve_location.js' %}"></script>
 
-<a href="{% url 'index' %}">Back to index Page</a>
+<a href="{% url 'index' %}">Back to HotZone Index Page</a>
 
-<div>You are now adding visited location record for {{case.patient.name}} (id:<span id="caseID">{{case.pk}}</span>)</div><br>
+<div>You are now adding a visited location record for {{case.patient.name}} (id:<span id="caseID">{{case.pk}}.</span>)</div><br>
 
 <form id="addLocationForm" action="" method="post">
     <div><label for="dateFrom">Date from: </label><input type="date" id="dateFrom" name="dateFrom"></div>
@@ -28,8 +28,8 @@
             <tr>
                 <th>Name</th>
                 <th>Address</th>
-                <th>X Coord</th>
-                <th>Y Coord</th>
+                <th>X-coordinateX</th>
+                <th>Y-coordinate</th>
             </tr>
         </thead>
     </table>

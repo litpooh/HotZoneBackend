@@ -13,7 +13,7 @@
     {% for location in caserecord.visitedlocation_set.all %}
         <p>{{ location.location }}, {{ location.category }}, {{ location.dateFrom }} to {{ location.dateTo }}.</p>
     {% endfor %}
-    <a href="{% url 'create_visitedlocation' %}">Add Visited Location for {{ caserecord.patient.name}}</a>
+    <a href="{% url 'create_visitedlocation' caserecord.id %}">Add Visited Location for {{ caserecord.patient.name}}</a>
     </ul>
   </body>
 </html>

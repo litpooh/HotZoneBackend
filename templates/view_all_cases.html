@@ -6,10 +6,11 @@
     <title>Case Records</title>
   </head>
   <body>
+    <h1>Case Records</h1>
     {% if case_records %}
         <ul>
         {% for case in case_records %}
-            <li><a href="{% url 'viewLocationRecords' case.id %}">{{ case.dateOfConfirm }} {{ case.patient }} {{ case.virus }} {{ case.localOrImported }}</a></li>
+            <li><a href="{% url 'viewLocationRecords' case.id %}">{{ case.patient }}, {{ case.dateOfConfirm }}, {{ case.virus }}, {{ case.localOrImported }}.</a></li>
         {% endfor %}
         </ul>
     {% else %}

@@ -16,3 +16,7 @@ Link: https://hotzonegroupn.herokuapp.com/
 7. View all locations
 8. Clustering based on specified parameters
 9. User Authentication
+
+## Limitations:
+1. Unable to change/reset password
+2. Only locations registered by the Hong Kong GeoData Store can be used to create the records of locations. Not all locations have an address recorded in the datasets.
